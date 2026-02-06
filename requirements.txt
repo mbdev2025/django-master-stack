@@ -1,0 +1,13 @@
+django>=5.0
+django-environ
+psycopg2-binary
+stripe
+requests
+aiohttp
+beautifulsoup4
+playwright
+celery
+redis
+django-rest-framework
+drf-spectacular
+pytest-django
