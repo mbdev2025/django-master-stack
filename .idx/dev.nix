@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs }: {
   # Canal stable
   channel = "stable-23.11";
 
-  # Paquets système pour une stack complexe (Django 6 + Wagtail + Celery + Playwright)
+  # Paquets système pour une stack complexe (Django 6.0 + Wagtail + Celery + Playwright)
   packages = [
     pkgs.python312
     pkgs.python312Packages.pip
