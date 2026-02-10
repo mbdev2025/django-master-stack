@@ -108,3 +108,6 @@ logs/
 *.log
 pip-log.txt
 pip-delete-this-directory.txt
+
+# IDX
+.idx/

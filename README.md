@@ -1,7 +1,7 @@
 # 🚀 Django Master Stack (Édition Omni-Channel)
 
 > **La stack ultime pour développer des Applications Mobiles, Sites E-commerce, SaaS et Plateformes Web complexes.**
-> *Backend: Django 6.0.2 + Wagtail CMS 7.3 | API: DRF 3.16.1 + JWT 5.5.1 | Frontend Ready: Mobile & Web*
+> *Backend: Django 6.0.2 + Wagtail CMS 7.3 | API: DRF 3.16.1 + JWT 5.5.1 | Python 3.12 | Frontend Ready: Mobile & Web*
 
 ## 🌟 Vision
 Cette stack ne se contente pas d'être un backend. C'est un **écosystème complet** conçu pour lancer des projets de haut niveau (Type "Uber", "Shopify custom", "Super App") en quelques minutes. Elle unifie la gestion de contenu (CMS), le commerce, l'automatisation et l'API mobile.
@@ -11,7 +11,7 @@ Cette stack ne se contente pas d'être un backend. C'est un **écosystème compl
 ## 🛠️ Pile technologique et architecture
 
 ### **Noyau et API (Priorité au mobile)**
-*   **Django 6.0.2** : Le framework web sécurisé et évolutif.
+*   **Django 6.0.2** : Le framework web sécurisé et évolutif (Python 3.12).
 *   **Django REST Framework 3.16.1** : Pour construire des API robustes.
 *   **JWT Auth 5.5.1 (`simplejwt`)** : Authentification sécurisée pour Apps Mobiles (iOS/Android) & SPA.
 *   **Swagger / OpenAPI 0.29.0 (`drf-spectacular`)** : Documentation API interactive automatique.
