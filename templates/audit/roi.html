@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block title %}Rentabilité & ROI{% endblock %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="glass-card" style="margin-bottom: 25px; border-left: 4px solid #39ff14;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <a href="{% url 'dashboard-pro' %}" class="btn-neon"
+                    style="padding: 8px 15px; font-size: 0.8em; text-decoration: none;">⬅️ Retour Pro</a>
+                <h2>💰 Analyse de Rentabilité (ROI)</h2>
+            </div>
+            <p class="text-muted">Projection financière sur 20 ans incluant l'inflation.</p>
+        </div>
+        <div>
+            <div style="text-align: right;">
+                <span class="text-muted" style="font-size: 0.9em;">Retour sur Investissement</span>
+                <div style="font-size: 2.5rem; font-weight: bold; color: #39ff14;">
+                    {% if break_even_year %}
+                    {{ break_even_year }} Ans
+                    {% else %}
+                    > 20 Ans
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid" style="grid-template-columns: 350px 1fr; gap: 20px;">
+
+    <!-- LEFT: HYPOTHESES -->
+    <div>
+        <div class="glass-card">
+            <h3>Paramètres Financiers</h3>
+            <form action="{% url 'audit_update_assumptions' %}" method="POST" style="margin-top: 20px;">
+                {% csrf_token %}
+
+                <label style="display: block; margin-bottom: 15px;">
+                    <span class="text-muted">Investissement Initial (TTC)</span>
+                    <input type="text" value="{{ investment|floatformat:2 }} €" class="input-glass"
+                        style="width: 100%; color: #ef4444; font-weight: bold;" disabled>
+                    <span style="font-size: 0.7em; color: #64748b;">Issu du devis</span>
+                </label>
+
+                <label style="display: block; margin-bottom: 15px;">
+                    <span class="text-muted">Économie Solaire (An 1)</span>
+                    <input type="number" step="0.01" name="savings"
+                        value="{{ session.yearly_savings_estimated|floatformat:2 }}" class="input-glass"
+                        style="width: 100%; color: #39ff14; font-weight: bold;">
+                    <span style="font-size: 0.7em; color: #64748b;">Valeur estimée par la simulation</span>
+                </label>
+
+                <label style="display: block; margin-bottom: 20px;">
+                    <span class="text-muted">Inflation Électricité (%/an)</span>
+                    <input type="number" step="0.1" name="inflation"
+                        value="{{ session.electricity_inflation|floatformat:1 }}" class="input-glass"
+                        style="width: 100%;">
+                    <span style="font-size: 0.7em; color: #64748b;">Standard marché : 4% à 7%</span>
+                </label>
+
+                <button type="submit" class="btn-neon" style="width: 100%;">Recalculer</button>
+            </form>
+
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>Gain Net (20 ans)</span>
+                    <strong style="color: #39ff14;">+{{ net_gain_20y|floatformat:0 }} €</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Coût kWh Solaire</span>
+                    <strong style="color: #3b82f6;">0.08 €</strong> <!-- Mock Value for now -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT: CHART -->
+    <div>
+        <div class="glass-card" style="padding: 20px;">
+            <h3 style="margin: 0 0 10px 0;">Courbe de Cash-Flow Cumulé</h3>
+            <p class="text-muted" style="margin: 0 0 15px 0; font-size: 0.85em;">Le point de croisement rouge/vert
+                indique votre retour sur investissement.</p>
+
+            <div style="height: 320px; position: relative; width: 100%;">
+                <canvas id="roiChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('roiChart').getContext('2d');
+
+    // Data from Django - wrapped in JSON.parse for IDE compatibility
+    const labels = JSON.parse("{{ chart_labels|safe }}");
+    const savingsData = JSON.parse("{{ chart_data|safe }}");
+    const investData = JSON.parse("{{ chart_investment|safe }}");
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Investissement Initial (Coût)',
+                    data: investData,
+                    borderColor: '#ef4444',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false
+                },
+                {
+                    label: 'Gains Cumulés (Économies Facture)',
+                    data: savingsData,
+                    borderColor: '#39ff14',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 5,
+                    left: 10,
+                    right: 10
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: {
+                        color: '#94a3b8',
+                        maxTicksLimit: 6,
+                        padding: 5,
+                        callback: function (value) { return value + ' €' }
+                    }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: '#94a3b8',
+                        padding: 5
+                    },
+                    title: { display: true, text: 'Années après installation', color: '#64748b' }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function (context) {
+                            return context.dataset.label + ': ' + context.parsed.y.toLocaleString() + ' €';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

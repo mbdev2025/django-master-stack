@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Espace Pro - Connexion{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; padding: 40px 0;">
+    <div class="glass-card" style="width: 100%; max-width: 450px; border-top: 4px solid #3b82f6;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🏭</div>
+            <h2
+                style="margin: 0; background: linear-gradient(to right, #fff, #3b82f6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                Espace Pro Solaire
+            </h2>
+            <p class="text-muted" style="font-size: 0.9em; margin-top: 10px;">
+                Connectez-vous pour gérer vos audits et vos clients.
+            </p>
+        </div>
+
+        <form action="{% url 'dashboard-pro' %}" method="GET" style="display: flex; flex-direction: column; gap: 20px;">
+            <div>
+                <label
+                    style="font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); display: block; margin-bottom: 8px;">
+                    Identifiant Professionnel
+                </label>
+                <input type="text" placeholder="ex: installer_01"
+                    style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border); padding: 12px; border-radius: 8px; color: white; width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div>
+                <label
+                    style="font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); display: block; margin-bottom: 8px;">
+                    Mot de passe
+                </label>
+                <input type="password" placeholder="••••••••"
+                    style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--glass-border); padding: 12px; border-radius: 8px; color: white; width: 100%; box-sizing: border-box;">
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px;">
+                <label
+                    style="display: flex; align-items: center; gap: 8px; font-size: 0.85em; color: var(--text-muted); cursor: pointer;">
+                    <input type="checkbox" style="accent-color: #3b82f6;"> Se souvenir de moi
+                </label>
+                <a href="#" style="color: #3b82f6; text-decoration: none; font-size: 0.85em;">Mot de passe oublié ?</a>
+            </div>
+
+            <button type="submit" class="btn-neon"
+                style="width: 100%; margin-top: 10px; border-color: #3b82f6; color: #3b82f6; padding: 15px;">
+                ENTRER DANS MON ESPACE PRO
+            </button>
+        </form>
+
+        <div
+            style="margin-top: 30px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+            <p class="text-muted" style="font-size: 0.85em;">
+                Pas encore partenaire ? <a href="#"
+                    style="color: var(--primary-neon); text-decoration: none; font-weight: bold;">Demander un accès
+                    installateur</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

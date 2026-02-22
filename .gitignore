@@ -1,0 +1,32 @@
+# Django
+*.log
+*.sqlite3
+.env
+db.sqlite3
+__pycache__/
+*.py[cod]
+*$py.class
+local_settings.py
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# Images & Assets
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# IDEs
+.idea/
+.vscode/
+
+# Project specific
+apps/**/__pycache__/
+config/__pycache__/
+server.log
+test_result.log
+static/

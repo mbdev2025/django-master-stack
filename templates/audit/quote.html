@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}Éditeur de Devis{% endblock %}
+
+{% block content %}
+<style>
+    .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .invoice-table th {
+        color: #94a3b8;
+        font-size: 0.8em;
+        text-transform: uppercase;
+    }
+
+    .invoice-table tr:hover {
+        background: rgba(59, 130, 246, 0.05);
+    }
+
+    .category-badge {
+        font-size: 0.7em;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #cbd5e1;
+    }
+</style>
+
+<div class="glass-card" style="margin-bottom: 25px; border-left: 4px solid #3b82f6;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h2>💶 Chiffrage & Devis</h2>
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <span class="text-muted">Étape 2/3 : Investissement</span>
+                <a href="{% url 'audit_roi_report' %}"
+                    style="color: #39ff14; text-decoration: none; font-weight: bold;">Voir la Rentabilité &rarr;</a>
+            </div>
+        </div>
+        <div>
+            <button class="btn-neon" style="border-color:white; color:white; opacity: 0.5; cursor: not-allowed;">📤
+                Importer Devis PDF (Bientôt)</button>
+        </div>
+    </div>
+</div>
+
+<div class="grid" style="grid-template-columns: 2fr 1fr; gap: 20px;">
+
+    <!-- LEFT: ITEMS LIST -->
+    <div class="glass-card">
+        <h3>Détail du Projet</h3>
+
+        {% if items %}
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Description</th>
+                    <th style="text-align: right;">Qté</th>
+                    <th style="text-align: right;">P.U. (HT)</th>
+                    <th style="text-align: right;">Total (HT)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td><span class="category-badge">{{ item.get_category_display }}</span></td>
+                    <td>{{ item.description }}</td>
+                    <td style="text-align: right;">{{ item.quantity|floatformat:0 }}</td>
+                    <td style="text-align: right;">{{ item.unit_price_ht|floatformat:2 }} €</td>
+                    <td style="text-align: right; color: white;">{{ item.total_price|floatformat:2 }} €</td>
+                    <td style="text-align: right;">
+                        <a href="{% url 'audit_delete_quote_line' item.id %}"
+                            style="color: #ef4444; font-size: 1.2em; text-decoration: none;">&times;</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div style="text-align: center; padding: 40px; color: #64748b;">
+            <p>Aucune ligne dans le chiffrage.</p>
+            <p>Ajoutez des éléments techniques ou administratifs via le formulaire.</p>
+        </div>
+        {% endif %}
+
+        <!-- TOTALS -->
+        <div
+            style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: flex-end;">
+            <div style="text-align: right; width: 200px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span class="text-muted">Total HT</span>
+                    <strong>{{ total_ht|floatformat:2 }} €</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span class="text-muted">TVA (20%)</span>
+                    <strong>{{ total_ht|floatformat:2 }} €</strong>
+                </div>
+                <div
+                    style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 1.2em; color: #3b82f6;">
+                    <span>Net à Payer</span>
+                    <strong style="border-bottom: 2px solid #3b82f6;">{{ total_ttc|floatformat:2 }} €</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT: ADD FORM -->
+    <div>
+        <div class="glass-card" style="position: sticky; top: 20px;">
+            <h3>➕ Ajouter une Ligne</h3>
+            <form action="{% url 'audit_add_quote_line' %}" method="POST"
+                style="display: flex; flex-direction: column; gap: 15px;">
+                {% csrf_token %}
+
+                <label>
+                    <span class="text-muted" style="font-size:0.8em;">Catégorie</span>
+                    <select name="category" class="input-glass" style="width: 100%; margin-top: 5px;">
+                        {% for code, label in categories %}
+                        <option value="{{ code }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <label>
+                    <span class="text-muted" style="font-size:0.8em;">Description</span>
+                    <input type="text" name="description" placeholder="Ex: Panneaux SunPower 400W" class="input-glass"
+                        style="width: 100%; margin-top: 5px;" required>
+                </label>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <label>
+                        <span class="text-muted" style="font-size:0.8em;">Quantité</span>
+                        <input type="number" step="0.1" name="quantity" value="1" class="input-glass"
+                            style="width: 100%; margin-top: 5px;">
+                    </label>
+                    <label>
+                        <span class="text-muted" style="font-size:0.8em;">Prix Unitaire HT</span>
+                        <input type="number" step="0.01" name="price" placeholder="0.00" class="input-glass"
+                            style="width: 100%; margin-top: 5px;" required>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-neon" style="width: 100%; margin-top: 10px;">Ajouter au Devis</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
