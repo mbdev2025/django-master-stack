@@ -1,13 +1,41 @@
+# Core Django
 django>=5.0
 django-environ
 psycopg2-binary
+
+# REST Framework & API
+djangorestframework
+djangorestframework-simplejwt
+dj-rest-auth
+django-allauth
+drf-spectacular
+django-filter
+
+# Payments & Billing
 stripe
+
+# Web Scraping & Automation
 requests
 aiohttp
 beautifulsoup4
 playwright
 celery
 redis
-django-rest-framework
-drf-spectacular
+
+# N8N Integration
+# N8N uses its own API, no additional packages needed
+
+# Testing
 pytest-django
+pytest-cov
+factory-boy
+faker
+
+# Development & DevOps
+django-debug-toolbar
+sentry-sdk
+django-prometheus
+
+# Additional utilities
+Pillow  # Image handling for avatars/logos
+python-decouple  # Environment variables
