@@ -9,8 +9,9 @@ urlpatterns = [
     # API routes
     path('api/', include('apps.users.urls')),
     path('api/', include('apps.tenants.urls')),
-    path('api/', include('apps.subscriptions.urls')),
-    path('api/', include('apps.notifications.urls')),
+    path('api/subscriptions/', include('apps.subscriptions.urls')),
+    path('api/notifications/', include('apps.notifications.urls')),
+    path('api/analytics/', include('apps.analytics.urls')),
     path('api/', include('apps.payments.urls')),
     path('api/', include('apps.automation.urls')),
 ]

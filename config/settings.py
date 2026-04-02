@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.tenants',
     'apps.subscriptions',
     'apps.notifications',
+    'apps.analytics',
     'apps.payments',
     'apps.automation',
     'apps.scrapers',

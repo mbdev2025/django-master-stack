@@ -1,6 +1,16 @@
-from django.urls import path
-from .views import notification_list
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import (
+    NotificationViewSet, NotificationPreferenceViewSet,
+    EmailTemplateViewSet, NotificationLogViewSet
+)
+
+router = DefaultRouter()
+router.register(r'notifications', NotificationViewSet, basename='notification')
+router.register(r'preferences', NotificationPreferenceViewSet, basename='notification-preference')
+router.register(r'email-templates', EmailTemplateViewSet, basename='email-template')
+router.register(r'logs', NotificationLogViewSet, basename='notification-log')
 
 urlpatterns = [
-    path('notifications/', notification_list, name='notification-list'),
+    path('', include(router.urls)),
 ]
