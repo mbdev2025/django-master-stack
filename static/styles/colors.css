@@ -1,0 +1,125 @@
+/* ========================================
+   COLOR PALETTE - Medium Style (Minimalist)
+   ======================================== */
+
+:root {
+  /* Primary Colors - Medium Style */
+  --color-primary: #1a1a1a;
+  --color-secondary: #757575;
+  --color-accent: #2962ff;
+
+  /* Semantic Colors */
+  --color-success: #00a698;
+  --color-warning: #f5a623;
+  --color-error: #e03131;
+  --color-info: #2962ff;
+
+  /* Neutral Grays - Medium Style */
+  --color-gray-50: #f9f9f9;
+  --color-gray-100: #f3f3f3;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #303030;
+  --color-gray-900: #1a1a1a;
+
+  /* Background Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9f9f9;
+  --color-bg-tertiary: #f3f3f3;
+  --color-bg-inverse: #1a1a1a;
+
+  /* Text Colors */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #757575;
+  --color-text-tertiary: #a3a3a3;
+  --color-text-inverse: #ffffff;
+  --color-text-disabled: #d4d4d4;
+
+  /* Border Colors */
+  --color-border-light: #e5e5e5;
+  --color-border-medium: #d4d4d4;
+  --color-border-dark: #a3a3a3;
+
+  /* Interactive Colors */
+  --color-primary-hover: #2962ff;
+  --color-primary-active: #1a4fe5;
+  --color-primary-disabled: #d4d4d4;
+}
+
+/* ========================================
+   COLOR UTILITIES
+   ======================================== */
+
+/* Background Colors */
+.bg-white { background-color: var(--color-bg-primary); }
+.bg-gray-50 { background-color: var(--color-gray-50); }
+.bg-gray-100 { background-color: var(--color-gray-100); }
+.bg-gray-200 { background-color: var(--color-gray-200); }
+.bg-black { background-color: var(--color-gray-900); }
+
+/* Text Colors */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+.text-white { color: var(--color-text-inverse); }
+.text-accent { color: var(--color-accent); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+
+/* Border Colors */
+.border-light { border-color: var(--color-border-light); }
+.border-medium { border-color: var(--color-border-medium); }
+.border-dark { border-color: var(--color-border-dark); }
+
+/* ========================================
+   OVERLAYS & SURFACES
+   ======================================== */
+
+/* Elevated surfaces */
+.surface-elevated {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.surface-elevated-high {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Flat surfaces */
+.surface-flat {
+  box-shadow: none;
+}
+
+/* Background overlays */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* ========================================
+   SEMANTIC COLOR BACKGROUNDS
+   ======================================== */
+
+.bg-success {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+  color: white;
+}
+
+.bg-error {
+  background-color: var(--color-error);
+  color: white;
+}
+
+.bg-info {
+  background-color: var(--color-info);
+  color: white;
+}

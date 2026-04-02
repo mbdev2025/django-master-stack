@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - {% endblock %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <div class="mb-8">
+        <h1 class="text-h1">Tableau de Bord</h1>
+        <p class="text-secondary mt-2">Bienvenue sur votre dashboard SaaS</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-4 gap-6 mb-8">
+        <div class="stat-card animate-fade-in-up">
+            <div class="stat-value">1,234</div>
+            <div class="stat-label">Utilisateurs Actifs</div>
+            <div class="stat-change positive">
+                <span>+12%</span>
+                <span class="text-xs text-secondary">vs mois dernier</span>
+            </div>
+        </div>
+
+        <div class="stat-card animate-fade-in-up" style="animation-delay: 100ms">
+            <div class="stat-value">€45,678</div>
+            <div class="stat-label">Revenu Mensuel</div>
+            <div class="stat-change positive">
+                <span>+23%</span>
+                <span class="text-xs text-secondary">vs mois dernier</span>
+            </div>
+        </div>
+
+        <div class="stat-card animate-fade-in-up" style="animation-delay: 200ms">
+            <div class="stat-value">89%</div>
+            <div class="stat-label">Taux de Rétention</div>
+            <div class="stat-change positive">
+                <span>+5%</span>
+                <span class="text-xs text-secondary">vs mois dernier</span>
+            </div>
+        </div>
+
+        <div class="stat-card animate-fade-in-up" style="animation-delay: 300ms">
+            <div class="stat-value">234</div>
+            <div class="stat-label">Nouveaux Clients</div>
+            <div class="stat-change negative">
+                <span>-3%</span>
+                <span class="text-xs text-secondary">vs mois dernier</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-3 gap-6">
+        <!-- Main Chart -->
+        <div class="card col-span-2">
+            <div class="card-header">
+                <h3 class="text-h3">Performance</h3>
+            </div>
+            <div class="card-body">
+                <p class="text-secondary">
+                    Graphique de performance des 30 derniers jours...
+                </p>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-h3">Activité Récente</h3>
+            </div>
+            <div class="card-body">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 p-3 bg-gray-50 rounded">
+                        <div class="w-2 h-2 rounded-full bg-success"></div>
+                        <div class="text-sm">
+                            <div class="font-medium">Nouvel utilisateur</div>
+                            <div class="text-secondary text-xs">Il y a 5 minutes</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 p-3 bg-gray-50 rounded">
+                        <div class="w-2 h-2 rounded-full bg-accent"></div>
+                        <div class="text-sm">
+                            <div class="font-medium">Nouvel abonnement</div>
+                            <div class="text-secondary text-xs">Il y a 12 minutes</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 p-3 bg-gray-50 rounded">
+                        <div class="w-2 h-2 rounded-full bg-warning"></div>
+                        <div class="text-sm">
+                            <div class="font-medium">Paiement reçu</div>
+                            <div class="text-secondary text-xs">Il y a 25 minutes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mt-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-h3">Actions Rapides</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-cols-4 gap-4">
+                    <button class="btn btn-secondary">
+                        Créer un Utilisateur
+                    </button>
+                    <button class="btn btn-secondary">
+                        Nouveau Ticket
+                    </button>
+                    <button class="btn btn-secondary">
+                        Générer Rapport
+                    </button>
+                    <button class="btn btn-primary">
+                        Voir Analytics
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Add specific page styles here */
+</style>
+{% endblock %}

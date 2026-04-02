@@ -1,0 +1,289 @@
+/* ========================================
+   MAIN STYLESHEET - Medium Design System
+   ======================================== */
+
+/* Import all design system files */
+@import url('./base.css');
+@import url('./typography.css');
+@import url('./colors.css');
+@import url('./spacing.css');
+@import url('./animations.css');
+@import url('./components.css');
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.container-sm {
+  max-width: 640px;
+}
+
+.container-lg {
+  max-width: 1280px;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Flex */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-4 {
+  gap: var(--space-4);
+}
+
+/* Display */
+.hidden { display: none; }
+.block { display: block; }
+.inline-block { display: inline-block; }
+
+/* Positioning */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.sticky { position: sticky; }
+
+/* Width */
+.w-full { width: 100%; }
+.max-w-sm { max-width: 24rem; }
+.max-w-md { max-width: 28rem; }
+.max-w-lg { max-width: 32rem; }
+.max-w-xl { max-width: 36rem; }
+
+/* Height */
+.h-full { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+
+/* Text Alignment */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Truncation */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========================================
+   DASHBOARD LAYOUTS - Medium Style
+   ======================================== */
+
+/* Dashboard Container */
+.dashboard {
+  min-height: 100vh;
+  background: var(--color-bg-secondary);
+}
+
+/* Header */
+.header {
+  background: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-light);
+  padding: var(--space-4) var(--space-6);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: var(--space-8);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: var(--color-bg-primary);
+  border-right: 1px solid var(--border-light);
+  padding: var(--space-6);
+}
+
+/* Navigation */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-secondary);
+  border-radius: 6px;
+  transition: all var(--duration-fast) var(--ease-in-out-cubic);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.nav-link.active {
+  background: var(--color-bg-secondary);
+  color: var(--color-accent);
+  font-weight: var(--font-medium);
+}
+
+/* ========================================
+   TABLES - Medium Style
+   ======================================== */
+
+.table-container {
+  overflow-x: auto;
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-light);
+  background: var(--color-bg-secondary);
+}
+
+.table td {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background-color: var(--color-gray-50);
+}
+
+/* ========================================
+   FORMS - Medium Style
+   ======================================== */
+
+.form-group {
+  margin-bottom: var(--space-6);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.form-helper {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+
+.form-error {
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  margin-top: var(--space-1);
+}
+
+/* ========================================
+   DIVIDERS
+   ======================================== */
+
+.divider {
+  border-top: 1px solid var(--color-border-light);
+  margin: var(--space-6) 0;
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 100%;
+  background: var(--color-border-light);
+}
+
+/* ========================================
+   DROPDOWNS
+   ======================================== */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--duration-normal) var(--ease-in-out-cubic);
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-in-out-cubic);
+}
+
+.dropdown-item:hover {
+  background: var(--color-bg-secondary);
+}
